@@ -8,6 +8,26 @@ class VideoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(video.vodName);
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minWidth: double.infinity),
+      child: Column(
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5.0),
+              child: Image.network(
+                video.vodPic,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Text(
+            video.vodName,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 14),
+          )
+        ],
+      ),
+    );
   }
 }

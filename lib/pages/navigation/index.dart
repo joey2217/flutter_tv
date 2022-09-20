@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv/api/videoApi.dart';
 import 'package:flutter_tv/models/video.dart';
-import 'package:flutter_tv/states/count_model.dart';
-import 'package:flutter_tv/states/theme_model.dart';
 import 'package:flutter_tv/widgets/video_item.dart';
-import 'package:provider/provider.dart';
 
 class IndexNavigation extends StatefulWidget {
   const IndexNavigation({super.key});
@@ -25,20 +22,32 @@ class _IndexNavigationState extends State<IndexNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Scaffold(
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2, // 每行三列
+          childAspectRatio: 0.75, //显示区域宽高相等
+          mainAxisSpacing: 4,
+        ),
         itemCount: _list.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           return VideoItem(video: _list[index]);
-        });
+        },
+      ),
+    );
   }
 
   _getData() async {
     var data = await VideoApi().getVideoList({'page': _page});
     var videoList = data.list;
     if (_page == 1) {
-      _list = videoList;
+      setState(() {
+        _list = videoList;
+      });
     } else {
-      _list.addAll(videoList);
+      setState(() {
+        _list.addAll(videoList);
+      });
     }
   }
 }
