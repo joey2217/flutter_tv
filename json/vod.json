@@ -1,0 +1,44 @@
+{
+    "class": [
+        {
+            "type_id": 1,
+            "type_pid": 0,
+            "type_name": "电视剧"
+        }
+    ],
+    "code": 1,
+    "limit": 20,
+    "list": [
+        {
+            "vod_id": 33063,
+            "vod_name": "白发",
+            "type_id": 20,
+            "type_name": "内地剧",
+            "vod_time": "2022-09-20 17:05:55",
+            "vod_play_from": "jinyingm3u8$$$jinyingyun",
+            "type_id_1": 0,
+            "vod_sub": "白发皇妃 / 白发王妃 / The White-Haired Imperial Concubine / Princess Silver",
+            "vod_status": "",
+            "vod_tag": "爱情,古装",
+            "vod_pic": "https://image.ijycnd.com/cover/33063.jpg",
+            "vod_actor": "张雪迎,李治廷,经超,罗云熙,陈欣予,书亚信,王嵛,徐可,高广泽,米咪,田雷,田海蓉,黄灿灿,代文雯,刘锡明,聂玫,邓莎",
+            "vod_director": "李慧珠",
+            "vod_pubdate": "2019-05-15(中国大陆)",
+            "vod_total": 58,
+            "vod_area": "中国大陆",
+            "vod_lang": "汉语普通话",
+            "vod_year": "2019",
+            "vod_isend": 1,
+            "vod_remarks": "第58集",
+            "vod_score": "5.7",
+            "vod_douban_id": 30181485,
+            "vod_douban_score": "5.7",
+            "vod_content": "",
+            "vod_play_url": ""
+        }
+    ],
+    "msg": "数据列表",
+    "page": 1,
+    "pagecount": 1594,
+    "total": 31868
+}
