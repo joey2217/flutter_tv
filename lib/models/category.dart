@@ -1,10 +1,10 @@
-import 'package:json_annotation/json_annotation.dart';
-
-// user.g.dart 将在我们运行生成命令后自动生成
+import 'package:json_annotation/json_annotation.dart'; 
+  
 part 'category.g.dart';
 
 @JsonSerializable()
 class Category {
+
   @JsonKey(name: 'type_id')
   int typeId;
 
@@ -20,7 +20,9 @@ class Category {
     this.typeName,
   );
 
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      _$CategoryFromJson(json);
+  factory Category.fromJson(Map<String, dynamic> srcJson) =>
+      _$CategoryFromJson(srcJson);
+
   Map<String, dynamic> toJson() => _$CategoryToJson(this);
+
 }

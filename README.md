@@ -3,7 +3,11 @@
 
 ## dio
 
-https://github.com/flutterchina/dio/blob/master/README-ZH.md
+```sh
+dart pub add dio
+```
+
+https://github.com/cfug/dio/blob/main/dio/README-ZH.md
 
 
 ## shared_preferences
@@ -56,7 +60,7 @@ class User {
 ### generator 
 
 ```sh
-flutter pub run build_runner build
+dart run build_runner build --delete-conflicting-outputs
 ```    
 
 ## Provider
@@ -124,3 +128,5 @@ void main() {
 ```dart
 Text('${Provider.of<CountModel>(context).count}')
 ```
+
+## [GetX](https://github.com/jonataslaw/getx/blob/master/README.zh-cn.md)

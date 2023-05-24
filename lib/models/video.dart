@@ -1,8 +1,7 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart'; 
 
 part 'video.g.dart';
 
-///这个标注是告诉生成器，这个类是需要生成Model类的
 @JsonSerializable()
 class Video {
   @JsonKey(name: 'vod_id')
@@ -108,6 +107,9 @@ class Video {
     this.vodPlayUrl,
   );
 
-  factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
+  factory Video.fromJson(Map<String, dynamic> srcJson) =>
+      _$VideoFromJson(srcJson);
+
   Map<String, dynamic> toJson() => _$VideoToJson(this);
+
 }
