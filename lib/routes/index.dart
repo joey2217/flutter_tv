@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tv/routes/home.dart';
+import 'package:flutter_tv/routes/library.dart';
+import 'package:flutter_tv/routes/setting.dart';
+import 'package:flutter_tv/states/home.dart';
 import 'package:flutter_tv/states/state.dart';
 import 'package:get/get.dart';
 
 class Index extends StatelessWidget {
   const Index({super.key});
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    Home(),
+    Library(),
+    Setting(),
   ];
 
   @override
@@ -32,25 +25,28 @@ class Index extends StatelessWidget {
       body: Center(
         child: Obx(() => _widgetOptions.elementAt(c.navIndex.value)),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
-        ],
-        currentIndex: c.navIndex.value,
-        selectedItemColor: Colors.amber[800],
-        onTap: (value) => c.navIndex.value = value,
-      ),
+      bottomNavigationBar: Obx(() => BottomNavigationBar(
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: '首页',
+                backgroundColor: Colors.green,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.movie),
+                label: '片库',
+                backgroundColor: Colors.blue,
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: '设置',
+                backgroundColor: Colors.pink,
+              ),
+            ],
+            currentIndex: c.navIndex.value,
+            selectedItemColor: Colors.amber[800],
+            onTap: (value) => c.navIndex.value = value,
+          )),
     );
   }
 }

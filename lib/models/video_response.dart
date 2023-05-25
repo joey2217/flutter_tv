@@ -2,10 +2,10 @@ import 'package:flutter_tv/models/category.dart';
 import 'package:flutter_tv/models/video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'response.g.dart';
+part 'video_response.g.dart';
 
 @JsonSerializable()
-class Response {
+class VideoResponse {
   @JsonKey(name: 'class')
   List<Category> categories;
 
@@ -30,7 +30,7 @@ class Response {
   @JsonKey(name: 'total')
   int total;
 
-  Response(
+  VideoResponse(
     this.categories,
     this.code,
     this.limit,
@@ -41,8 +41,8 @@ class Response {
     this.total,
   );
 
-  factory Response.fromJson(Map<String, dynamic> srcJson) =>
-      _$ResponseFromJson(srcJson);
+  factory VideoResponse.fromJson(Map<String, dynamic> srcJson) =>
+      _$VideoResponseFromJson(srcJson);
 
-  Map<String, dynamic> toJson() => _$ResponseToJson(this);
+  Map<String, dynamic> toJson() => _$VideoResponseToJson(this);
 }

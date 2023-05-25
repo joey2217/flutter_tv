@@ -5,7 +5,7 @@ part 'profile.g.dart';
 enum AppTheme { system, light, dark }
 
 @JsonSerializable()
-class Profile extends Object {
+class Profile {
   @JsonKey(name: 'theme')
   AppTheme theme;
 

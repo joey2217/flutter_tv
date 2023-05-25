@@ -1,34 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tv/states/home.dart';
+import 'package:flutter_tv/widgets/video_grid.dart';
+import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: const Center(
-        child: Text('home'),
-      ),
+    return GetBuilder<HomeController>(
+      init: HomeController(),
+      builder: (_) {
+        final c = Get.find<HomeController>();
+        return ListView(
+          shrinkWrap: true,
+          children: [Text("${c.movies.length}")],
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tv/common/dio_request.dart';
 import 'package:flutter_tv/common/local_storage.dart';
 import 'package:flutter_tv/routes/index.dart';
 import 'package:flutter_tv/states/state.dart';
@@ -8,11 +9,12 @@ Future<void> main() async {
   await initServices();
 
   /// 等待服务初始化.
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 Future<void> initServices() async {
   print('starting services ...');
+  DioRequest.init();
   await LocalStorage.init();
 
   ///这里是你放get_storage、hive、shared_pref初始化的地方。
@@ -22,7 +24,6 @@ Future<void> initServices() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => const Index()),
       ],
+      debugShowCheckedModeBanner: false,
     );
   }
 }

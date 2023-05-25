@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'response.dart';
+part of 'video_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Response _$ResponseFromJson(Map<String, dynamic> json) => Response(
+VideoResponse _$VideoResponseFromJson(Map<String, dynamic> json) =>
+    VideoResponse(
       (json['class'] as List<dynamic>)
           .map((e) => Category.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -21,7 +22,8 @@ Response _$ResponseFromJson(Map<String, dynamic> json) => Response(
       json['total'] as int,
     );
 
-Map<String, dynamic> _$ResponseToJson(Response instance) => <String, dynamic>{
+Map<String, dynamic> _$VideoResponseToJson(VideoResponse instance) =>
+    <String, dynamic>{
       'class': instance.categories,
       'code': instance.code,
       'limit': instance.limit,
