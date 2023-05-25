@@ -130,3 +130,5 @@ Text('${Provider.of<CountModel>(context).count}')
 ```
 
 ## [GetX](https://github.com/jonataslaw/getx/blob/master/README.zh-cn.md)
+
+> https://juejin.cn/post/7047762658237349919#heading-23
