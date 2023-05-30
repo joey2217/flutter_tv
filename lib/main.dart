@@ -4,6 +4,7 @@ import 'package:flutter_tv/common/local_storage.dart';
 import 'package:flutter_tv/routes/index.dart';
 import 'package:flutter_tv/states/state.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   await initServices();

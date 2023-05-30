@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv/states/home.dart';
-import 'package:flutter_tv/widgets/video_grid.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {

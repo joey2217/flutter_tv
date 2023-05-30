@@ -9,6 +9,8 @@ class LocalStorage extends GetxService {
   static Profile profile = Profile(AppTheme.system);
 
   static Future<void> init() async {
+    // ignore: invalid_use_of_visible_for_testing_member
+    SharedPreferences.setMockInitialValues({});
     _prefs = await SharedPreferences.getInstance();
     String? profileStr = _prefs.getString('profile');
     if (profileStr != null) {

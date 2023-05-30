@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tv/routes/home.dart';
 import 'package:flutter_tv/routes/library.dart';
 import 'package:flutter_tv/routes/setting.dart';
-import 'package:flutter_tv/states/home.dart';
 import 'package:flutter_tv/states/state.dart';
 import 'package:get/get.dart';
 
