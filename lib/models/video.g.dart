@@ -15,7 +15,7 @@ Video _$VideoFromJson(Map<String, dynamic> json) => Video(
       json['vod_play_from'] as String,
       json['type_id_1'] as int,
       json['vod_sub'] as String,
-      json['vod_status'] as String,
+      json['vod_status'] as int,
       json['vod_tag'] as String,
       json['vod_pic'] as String,
       json['vod_actor'] as String,

@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_tv/common/request_cache.dart';
+import 'package:flutter_tv/models/video.dart';
 import 'package:flutter_tv/models/video_response.dart';
 
 const baseURL = 'https://jyzyapi.com/provide/vod/at/json';
@@ -23,12 +26,22 @@ class DioRequest {
   }
 
   Future<VideoResponse> fetchHotMovies() async {
-    final res = await dio.get('',
-        queryParameters: {'ac': 'detail', 'ids': hotMovieIds.join(',')});
-    var videoResponse = VideoResponse.fromJson(res.data);
-    print('fetchHotMovies code= ${videoResponse.code}');
+    var ids = hotMovieIds.join(',');
+    var param = {'ac': 'detail', 'ids': ids};
+    final res = await dio.get('', queryParameters: param);
+    var videoResponse = VideoResponse.fromJson(jsonDecode(res.data));
     videoResponse.list.sort(((a, b) =>
         hotMovieIds.indexOf(a.vodId).compareTo(hotMovieIds.indexOf(b.vodId))));
     return videoResponse;
+  }
+
+  Future<Video> fetchMovie(String id) async {
+    var param = {'ac': 'detail', 'ids': id};
+    final res = await dio.get('', queryParameters: param);
+    var videoResponse = VideoResponse.fromJson(jsonDecode(res.data));
+    if (videoResponse.list.isNotEmpty) {
+      return videoResponse.list[0];
+    }
+    throw "请求错误";
   }
 }

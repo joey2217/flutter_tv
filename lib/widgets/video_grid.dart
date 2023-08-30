@@ -12,13 +12,13 @@ class VideoGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text("$title + ${list.length}"),
+        Text(title),
         GridView.builder(
           shrinkWrap: true,
+          itemCount: list.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, //横轴三个子widget
-              childAspectRatio: 1.0 //宽高比为1时，子widget
-              ),
+            crossAxisCount: 2,
+          ),
           itemBuilder: (context, index) => VideoCard(video: list[index]),
         ),
       ],

@@ -29,7 +29,7 @@ class Video {
   String vodSub;
 
   @JsonKey(name: 'vod_status')
-  String vodStatus;
+  int vodStatus;
 
   @JsonKey(name: 'vod_tag')
   String vodTag;

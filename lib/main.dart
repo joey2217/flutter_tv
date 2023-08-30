@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv/common/dio_request.dart';
 import 'package:flutter_tv/common/local_storage.dart';
+import 'package:flutter_tv/routes/video.dart';
 import 'package:flutter_tv/routes/index.dart';
 import 'package:flutter_tv/states/state.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   await initServices();
@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => const Index()),
+        GetPage(name: '/video/:id', page: () => const Video()),
       ],
       debugShowCheckedModeBanner: false,
     );

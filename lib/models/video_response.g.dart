@@ -8,11 +8,8 @@ part of 'video_response.dart';
 
 VideoResponse _$VideoResponseFromJson(Map<String, dynamic> json) =>
     VideoResponse(
-      (json['class'] as List<dynamic>)
-          .map((e) => Category.fromJson(e as Map<String, dynamic>))
-          .toList(),
       json['code'] as int,
-      json['limit'] as int,
+      json['limit'] as String,
       (json['list'] as List<dynamic>)
           .map((e) => Video.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -24,7 +21,6 @@ VideoResponse _$VideoResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$VideoResponseToJson(VideoResponse instance) =>
     <String, dynamic>{
-      'class': instance.categories,
       'code': instance.code,
       'limit': instance.limit,
       'list': instance.list,

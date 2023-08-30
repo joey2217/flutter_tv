@@ -6,14 +6,12 @@ part 'video_response.g.dart';
 
 @JsonSerializable()
 class VideoResponse {
-  @JsonKey(name: 'class')
-  List<Category> categories;
 
   @JsonKey(name: 'code')
   int code;
 
   @JsonKey(name: 'limit')
-  int limit;
+  String limit;
 
   @JsonKey(name: 'list')
   List<Video> list;
@@ -31,7 +29,6 @@ class VideoResponse {
   int total;
 
   VideoResponse(
-    this.categories,
     this.code,
     this.limit,
     this.list,

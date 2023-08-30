@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_tv/models/cache_object.dart';
 
+const maxCacheCount = 50;
+
 class RequestCache extends Interceptor {
   // 为确保迭代器顺序和对象插入时间一致顺序一致，我们使用LinkedHashMap
   var cache = <String, CacheObject>{};
@@ -43,7 +45,9 @@ class RequestCache extends Interceptor {
     if (options.extra["noCache"] != true &&
         options.method.toLowerCase() == "get") {
       // 如果缓存数量超过最大数量限制，则先移除最早的一条记录
-      cache.remove(cache[cache.keys.first]);
+      if (cache.length >= maxCacheCount) {
+        cache.remove(cache[cache.keys.first]);
+      }
       String key = options.extra["cacheKey"] ?? options.uri.toString();
       cache[key] = CacheObject(object);
     }
