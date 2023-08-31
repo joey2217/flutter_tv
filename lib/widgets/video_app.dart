@@ -1,5 +1,8 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
+const url = 'https://hd.ijycnd.com/play/7axmKRnb/index.m3u8';
 
 /// Stateful widget to fetch and then display video content.
 class VideoApp extends StatefulWidget {
@@ -11,33 +14,60 @@ class VideoApp extends StatefulWidget {
 
 class _VideoAppState extends State<VideoApp> {
   late VideoPlayerController _controller;
+  ChewieController? _chewieController;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(
-        Uri.parse('https://hd.ijycnd.com/play/7axmKRnb/index.m3u8'))
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
+    _controller = VideoPlayerController.networkUrl(Uri.parse(url));
+    _controller.initialize().then((_) {
+      _chewieController = ChewieController(
+          videoPlayerController: _controller,
+          autoPlay: true,
+          additionalOptions: (context) {
+            return <OptionItem>[
+              OptionItem(
+                onTap: () => debugPrint('My option works!'),
+                iconData: Icons.chat,
+                title: 'My localized title',
+              ),
+              OptionItem(
+                onTap: () => debugPrint('Another option that works!'),
+                iconData: Icons.chat,
+                title: 'Another localized title',
+              ),
+            ];
+          },
+          optionsTranslation: OptionsTranslation(cancelButtonText: "返回"));
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: _controller.value.isInitialized
-          ? AspectRatio(
-              aspectRatio: _controller.value.aspectRatio,
-              child: VideoPlayer(_controller),
+        child: AspectRatio(
+      aspectRatio: _controller.value.aspectRatio,
+      child: _chewieController != null &&
+              _chewieController!.videoPlayerController.value.isInitialized
+          ? Chewie(
+              controller: _chewieController!,
             )
-          : Container(),
-    );
+          : const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                SizedBox(height: 20),
+                Text('Loading'),
+              ],
+            ),
+    ));
   }
 
   @override
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _chewieController?.dispose();
   }
 }

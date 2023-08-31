@@ -39,6 +39,8 @@ dependencies:
   json_annotation: ^4.8.1
   get: ^4.6.5
   shared_preferences: ^2.1.1
+  video_player: ^2.7.0
+  chewie: ^1.7.0
 
 dev_dependencies:
   flutter_test:

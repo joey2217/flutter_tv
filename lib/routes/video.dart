@@ -20,7 +20,7 @@ class Video extends StatelessWidget {
                   return Text("Error: ${snapshot.error}");
                 } else {
                   // 请求成功，显示数据
-                  return Column(
+                  return const Column(
                     children: [VideoApp()],
                   );
                 }

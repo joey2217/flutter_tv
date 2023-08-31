@@ -1,4 +1,3 @@
-import 'package:flutter_tv/models/category.dart';
 import 'package:flutter_tv/models/video.dart';
 import 'package:json_annotation/json_annotation.dart';
 
