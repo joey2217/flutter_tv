@@ -14,7 +14,6 @@ Future<void> main() async {
 }
 
 Future<void> initServices() async {
-  print('starting services ...');
   DioRequest.init();
   await LocalStorage.init();
 

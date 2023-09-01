@@ -6,7 +6,9 @@ const url = 'https://hd.ijycnd.com/play/7axmKRnb/index.m3u8';
 
 /// Stateful widget to fetch and then display video content.
 class VideoApp extends StatefulWidget {
-  const VideoApp({super.key});
+  final String liveUrl;
+
+  const VideoApp({super.key, required this.liveUrl});
 
   @override
   _VideoAppState createState() => _VideoAppState();
@@ -19,7 +21,7 @@ class _VideoAppState extends State<VideoApp> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(url));
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.liveUrl));
     _controller.initialize().then((_) {
       _chewieController = ChewieController(
           videoPlayerController: _controller,

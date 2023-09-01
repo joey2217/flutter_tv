@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv/common/dio_request.dart';
+import 'package:flutter_tv/common/utils.dart';
 import 'package:flutter_tv/widgets/video_app.dart';
+import 'package:flutter_tv/widgets/video_list.dart';
+import 'package:flutter_tv/widgets/video_tab.dart';
 import 'package:get/get.dart';
 
 class Video extends StatelessWidget {
@@ -14,18 +17,32 @@ class Video extends StatelessWidget {
         child: FutureBuilder(
             future: DioRequest().fetchMovie(id!),
             builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  // 请求失败，显示错误
-                  return Text("Error: ${snapshot.error}");
-                } else {
-                  // 请求成功，显示数据
-                  return const Column(
-                    children: [VideoApp()],
-                  );
-                }
+              if (snapshot.hasData && snapshot.data != null) {
+                var liveItems = parsePlayUrl(
+                    snapshot.data!.vodPlayFrom, snapshot.data!.vodPlayUrl);
+                return Column(
+                  children: [
+                    const SizedBox(
+                      height: 200,
+                      child: Text("header"),
+                    ),
+                    VideoApp(
+                      liveUrl: liveItems[0].url,
+                    ),
+                    VideoList(
+                      liveItems: liveItems,
+                    ),
+                    Container(
+                      child: Text(snapshot.data!.vodName),
+                    ),
+                    const Expanded(
+                      child: VideoTab(),
+                    ),
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return Text("Error: ${snapshot.error}");
               } else {
-                // 请求未结束，显示loading
                 return const Center(child: CircularProgressIndicator());
               }
             }),

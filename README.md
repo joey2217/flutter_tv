@@ -134,3 +134,8 @@ Text('${Provider.of<CountModel>(context).count}')
 > https://juejin.cn/post/7047762658237349919#heading-23
 
 https://github.com/fluttercommunity/chewie
+
+```shell
+keytool -genkey -v -keystore %userprofile%\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+fluttertv
+```
