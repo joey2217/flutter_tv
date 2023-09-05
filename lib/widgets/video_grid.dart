@@ -3,10 +3,9 @@ import 'package:flutter_tv/models/video.dart';
 import 'package:flutter_tv/widgets/video_card.dart';
 
 class VideoGrid extends StatelessWidget {
-  const VideoGrid({super.key, required this.list, required this.title});
+  const VideoGrid({super.key, required this.list});
 
   final List<Video> list;
-  final String title;
 
   @override
   Widget build(BuildContext context) {

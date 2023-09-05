@@ -10,17 +10,19 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       init: HomeController(),
-      builder: (_) {
-        final c = Get.find<HomeController>();
+      builder: (c) {
         return CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(
               child: SizedBox(
-                height: 100,
-                child: Text("电影"),
+                height: 30,
+                child: Text(
+                  "电影",
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
             ),
-            VideoGrid(list: c.movies, title: "电影")
+            VideoGrid(list: c.movies)
           ],
         );
       },

@@ -3,7 +3,6 @@ import 'package:flutter_tv/common/dio_request.dart';
 import 'package:flutter_tv/common/local_storage.dart';
 import 'package:flutter_tv/routes/video.dart';
 import 'package:flutter_tv/routes/index.dart';
-import 'package:flutter_tv/states/state.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
@@ -27,10 +26,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(StateController());
-
     return GetMaterialApp(
-      title: "app",
+      title: "FlutterTV",
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       initialRoute: '/',
       getPages: [

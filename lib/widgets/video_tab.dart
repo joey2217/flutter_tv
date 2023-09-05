@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv/widgets/keep_alive_wrapper.dart';
+import 'package:flutter_tv/widgets/video_info.dart';
+import 'package:flutter_tv/widgets/video_list.dart';
 
 class VideoTab extends StatefulWidget {
   const VideoTab({super.key});
@@ -15,7 +17,7 @@ class _VideoTabState extends State<VideoTab> with TickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -32,13 +34,12 @@ class _VideoTabState extends State<VideoTab> with TickerProviderStateMixin {
           controller: _tabController,
           tabs: const <Widget>[
             Tab(
-              icon: Icon(Icons.cloud_outlined),
+              // icon: Icon(Icons.list),
+              text: "播放列表",
             ),
             Tab(
-              icon: Icon(Icons.beach_access_sharp),
-            ),
-            Tab(
-              icon: Icon(Icons.brightness_5_sharp),
+              // icon: Icon(Icons.info),
+              text: "简介",
             ),
           ],
         ),
@@ -46,14 +47,9 @@ class _VideoTabState extends State<VideoTab> with TickerProviderStateMixin {
           child: TabBarView(
             controller: _tabController,
             children: const <Widget>[
-              Center(
-                child: Text("It's cloudy here"),
-              ),
-              Center(
-                child: Text("It's rainy here"),
-              ),
-              Center(
-                child: Text("It's sunny here"),
+              KeepAliveWrapper(child: VideoList()),
+              KeepAliveWrapper(
+                child: VideoInfo(),
               ),
             ],
           ),

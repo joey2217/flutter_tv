@@ -16,36 +16,37 @@ class Index extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final StateController c = Get.find();
-    return Scaffold(
-      appBar: AppBar(
-        title: Obx(() => Text("navIndex: ${c.navIndex}")),
-      ),
-      body: Center(
-        child: Obx(() => _widgetOptions.elementAt(c.navIndex.value)),
-      ),
-      bottomNavigationBar: Obx(() => BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: '首页',
-                backgroundColor: Colors.green,
+    return GetBuilder(
+        init: StateController(),
+        builder: (c) => Scaffold(
+              appBar: AppBar(
+                title: const Text('TODO 搜索'),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.movie),
-                label: '片库',
-                backgroundColor: Colors.blue,
+              body: Center(
+                child: _widgetOptions.elementAt(c.navIndex),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: '设置',
-                backgroundColor: Colors.pink,
+              bottomNavigationBar: BottomNavigationBar(
+                items: const <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: '首页',
+                    backgroundColor: Colors.green,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.movie),
+                    label: '片库',
+                    backgroundColor: Colors.blue,
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: '设置',
+                    backgroundColor: Colors.pink,
+                  ),
+                ],
+                currentIndex: c.navIndex,
+                selectedItemColor: Colors.amber[800],
+                onTap: c.onNavTap,
               ),
-            ],
-            currentIndex: c.navIndex.value,
-            selectedItemColor: Colors.amber[800],
-            onTap: (value) => c.navIndex.value = value,
-          )),
-    );
+            ));
   }
 }

@@ -1,4 +1,4 @@
-import 'package:json_annotation/json_annotation.dart'; 
+import 'package:json_annotation/json_annotation.dart';
 
 part 'video.g.dart';
 
@@ -111,5 +111,4 @@ class Video {
       _$VideoFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$VideoToJson(this);
-
 }

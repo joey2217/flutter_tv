@@ -4,11 +4,13 @@ import 'package:flutter_tv/models/profile.dart';
 import 'package:get/get.dart';
 
 class StateController extends GetxController {
-  var profile = LocalStorage.profile.obs;
-  var navIndex = 0.obs;
+  var profile = LocalStorage.profile;
+  int navIndex = 0;
+
+  static StateController get to => Get.find();
 
   changeTheme(AppTheme theme) {
-    profile.value.theme = theme;
+    profile.theme = theme;
     if (theme == AppTheme.system) {
       Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
     } else if (theme == AppTheme.light) {
@@ -17,9 +19,11 @@ class StateController extends GetxController {
       Get.changeTheme(ThemeData.dark());
     }
     LocalStorage.saveProfile();
+    update();
   }
 
   onNavTap(int index) {
-    navIndex.value = index;
+    navIndex = index;
+    update();
   }
 }
