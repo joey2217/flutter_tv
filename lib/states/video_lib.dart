@@ -19,8 +19,13 @@ class VideoLibController extends GetxController {
 
   static VideoLibController get to => Get.find();
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchSearchData();
+  }
+
   Future fetchSearchData() async {
-    debugPrint('${list.length} fetchSearchData');
     if (state == FetchState.finish) {
       debugPrint('END');
       return;
@@ -33,8 +38,18 @@ class VideoLibController extends GetxController {
     } else {
       state = FetchState.init;
     }
-    debugPrint('${list.length} fetchSearchData');
     update();
+  }
+
+  fetchNextPage() {
+    param.nextPage();
+    fetchSearchData();
+  }
+
+  search(String searchKey) {
+    param.search(searchKey);
+    list.clear();
+    fetchSearchData();
   }
 
   onSelectionChanged(Set<int> newSelection) {

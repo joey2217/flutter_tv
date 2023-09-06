@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
@@ -6,11 +7,10 @@ enum AppTheme { system, light, dark }
 
 @JsonSerializable()
 class Profile {
-  @JsonKey(name: 'theme')
-  AppTheme theme;
+  Brightness? brightness;
 
   Profile(
-    this.theme,
+    this.brightness,
   );
 
   factory Profile.fromJson(Map<String, dynamic> srcJson) =>

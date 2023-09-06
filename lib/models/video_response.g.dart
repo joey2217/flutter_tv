@@ -14,7 +14,7 @@ VideoResponse _$VideoResponseFromJson(Map<String, dynamic> json) =>
           .map((e) => Video.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['msg'] as String,
-      json['page'] as int,
+      json['page'] is int ? json['page'] : int.parse(json['page']),
       json['pagecount'] as int,
       json['total'] as int,
     );

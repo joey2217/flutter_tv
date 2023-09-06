@@ -13,6 +13,8 @@ class VideoGrid extends StatelessWidget {
       itemCount: list.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
+        mainAxisSpacing: 2,
+        crossAxisSpacing: 2,
       ),
       itemBuilder: (context, index) => VideoCard(video: list[index]),
     );

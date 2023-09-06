@@ -8,18 +8,24 @@ class VideoController extends GetxController {
   var video = Video(0, '', 0, '', '', '', 0, '', 0, '', '', '', '', '', 0, '',
       '', '', 0, '', '', 0, '', '', '');
 
-  static VideoController get to => Get.find();
+  List<LiveItem> playList = [];
 
-  List<LiveItem> get playList =>
-      parsePlayUrl(video.vodPlayFrom, video.vodPlayUrl);
-
-  String? get playUrl => playList[playIndex].url;
+  String playUrl = '';
 
   Future<bool> fetchVideo(String id) async {
     var data = await DioRequest().fetchMovie(id);
     video = data;
     update();
     return true;
+  }
+
+  setVideo(Video v) {
+    video = v;
+    playList = parsePlayUrl(video.vodPlayFrom, video.vodPlayUrl);
+    if (playList.isNotEmpty) {
+      playUrl = playList[playIndex].url;
+    }
+    update();
   }
 
   play(int index) {

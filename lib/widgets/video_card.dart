@@ -9,32 +9,35 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: InkWell(
+    return InkWell(
         splashColor: Colors.blue.withAlpha(30),
         onTap: () {
           debugPrint('Card tapped. ${video.vodId}');
           Get.toNamed("/video/${video.vodId}");
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Image.network(
+        child: GridTile(
+          footer: Material(
+            color: Colors.transparent,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(4)),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: GridTileBar(
+              backgroundColor: Colors.black45,
+              title: Text(video.vodName),
+            ),
+          ),
+          child: Material(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+            clipBehavior: Clip.antiAlias,
+            child: Image.network(
               video.vodPic,
               width: 285,
               height: 400,
               fit: BoxFit.fitWidth,
-            )),
-            Text(
-              video.vodName,
-              style: const TextStyle(fontSize: 16),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }

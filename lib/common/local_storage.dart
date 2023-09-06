@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocalStorage extends GetxService {
   static late SharedPreferences _prefs;
 
-  static Profile profile = Profile(AppTheme.system);
+  static Profile profile = Profile(null);
 
   static Future<void> init() async {
     // ignore: invalid_use_of_visible_for_testing_member

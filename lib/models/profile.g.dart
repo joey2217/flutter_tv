@@ -7,15 +7,14 @@ part of 'profile.dart';
 // **************************************************************************
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
-      $enumDecode(_$AppThemeEnumMap, json['theme']),
+      $enumDecodeNullable(_$BrightnessEnumMap, json['brightness']),
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
-      'theme': _$AppThemeEnumMap[instance.theme]!,
+      'brightness': _$BrightnessEnumMap[instance.brightness],
     };
 
-const _$AppThemeEnumMap = {
-  AppTheme.system: 'system',
-  AppTheme.light: 'light',
-  AppTheme.dark: 'dark',
+const _$BrightnessEnumMap = {
+  Brightness.dark: 'dark',
+  Brightness.light: 'light',
 };

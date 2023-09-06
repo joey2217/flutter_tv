@@ -3,6 +3,7 @@ import 'package:flutter_tv/routes/home.dart';
 import 'package:flutter_tv/routes/library.dart';
 import 'package:flutter_tv/routes/setting.dart';
 import 'package:flutter_tv/states/state.dart';
+import 'package:flutter_tv/widgets/app_search_bar.dart';
 import 'package:get/get.dart';
 
 class Index extends StatelessWidget {
@@ -16,14 +17,16 @@ class Index extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-        init: StateController(),
+    return GetBuilder<StateController>(
         builder: (c) => Scaffold(
               appBar: AppBar(
-                title: const Text('TODO 搜索'),
+                title: const AppSearchBar(),
               ),
-              body: Center(
-                child: _widgetOptions.elementAt(c.navIndex),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Center(
+                  child: _widgetOptions.elementAt(c.navIndex),
+                ),
               ),
               bottomNavigationBar: BottomNavigationBar(
                 items: const <BottomNavigationBarItem>[

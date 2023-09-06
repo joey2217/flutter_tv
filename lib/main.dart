@@ -3,6 +3,8 @@ import 'package:flutter_tv/common/dio_request.dart';
 import 'package:flutter_tv/common/local_storage.dart';
 import 'package:flutter_tv/routes/video.dart';
 import 'package:flutter_tv/routes/index.dart';
+import 'package:flutter_tv/states/state.dart';
+import 'package:flutter_tv/states/video_lib.dart';
 import 'package:get/get.dart';
 
 Future<void> main() async {
@@ -26,15 +28,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: "FlutterTV",
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-      initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => const Index()),
-        GetPage(name: '/video/:id', page: () => const Video()),
-      ],
-      debugShowCheckedModeBanner: false,
-    );
+    Get.lazyPut(() => VideoLibController());
+    return GetBuilder(
+        init: StateController(),
+        builder: (c) {
+          return GetMaterialApp(
+            title: "FlutterTV",
+            theme: ThemeData(
+                primarySwatch: Colors.blue,
+                useMaterial3: true,
+                brightness: c.brightness ?? Theme.of(context).brightness),
+            initialRoute: '/',
+            getPages: [
+              GetPage(name: '/', page: () => const Index()),
+              GetPage(name: '/video/:id', page: () => const Video()),
+            ],
+            debugShowCheckedModeBanner: false,
+          );
+        });
   }
 }
