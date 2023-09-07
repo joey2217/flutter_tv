@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 class VideoPage extends StatelessWidget {
   const VideoPage({super.key});
 
+  dispose(){}
+
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)!.settings.arguments as int;
@@ -24,6 +26,7 @@ class VideoPage extends StatelessWidget {
                   Stack(
                     alignment: AlignmentDirectional.center,
                     children: [
+                         VideoApp(liveUrl: playUrl,),
                       Positioned(
                           top: 10,
                           left: 10,
@@ -32,20 +35,17 @@ class VideoPage extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                          )),
-                      playUrl == ''
-                          ? const Center(
-                              child: AspectRatio(
-                                aspectRatio: 16.0 / 9.0,
-                                child: Text('Loading'),
-                              ),
-                            )
-                          : VideoApp(
-                              liveUrl: playUrl,
-                            )
+                          )
+                      ),
                     ],
                   ),
-                  Text(video.vodName),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    child: Text(video.vodName, style: const TextStyle(fontSize: 20),),
+                  ), Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    child: Text(context.read<VideoModal>().playUrl),
+                  ),
                   const Expanded(
                     child: VideoTab(),
                   ),

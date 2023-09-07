@@ -32,9 +32,9 @@ class AppSearchBar extends StatelessWidget {
                 isSelected: isSelected,
                 onPressed: () {
                   if (isSelected) {
-                    appModel.changeTheme(Brightness.light);
-                  } else {
                     appModel.changeTheme(Brightness.dark);
+                  } else {
+                    appModel.changeTheme(Brightness.light);
                   }
                 },
                 icon: const Icon(Icons.wb_sunny_outlined),

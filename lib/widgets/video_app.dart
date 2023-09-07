@@ -26,20 +26,6 @@ class _VideoAppState extends State<VideoApp> {
       _chewieController = ChewieController(
           videoPlayerController: _controller,
           autoPlay: true,
-          additionalOptions: (context) {
-            return <OptionItem>[
-              OptionItem(
-                onTap: () => debugPrint('My option works!'),
-                iconData: Icons.chat,
-                title: 'My localized title',
-              ),
-              OptionItem(
-                onTap: () => debugPrint('Another option that works!'),
-                iconData: Icons.chat,
-                title: 'Another localized title',
-              ),
-            ];
-          },
           optionsTranslation: OptionsTranslation(cancelButtonText: "返回"));
       setState(() {});
     });
@@ -49,7 +35,7 @@ class _VideoAppState extends State<VideoApp> {
   Widget build(BuildContext context) {
     return Center(
         child: AspectRatio(
-      aspectRatio: _controller.value.aspectRatio,
+      aspectRatio: 16.0 / 9.0,
       child: _chewieController != null &&
               _chewieController!.videoPlayerController.value.isInitialized
           ? Chewie(
