@@ -10,42 +10,46 @@ class Library extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var channelList = context.watch<LibraryModal>().channelList;
-    return Column(
-      children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: SegmentedButton(
-            emptySelectionAllowed: true,
-            segments: level1Options
-                .map((e) => ButtonSegment(value: e.id, label: Text(e.label)))
-                .toList(),
-            selected: {context.watch<LibraryModal>().selectedPid},
-            onSelectionChanged: context.read<LibraryModal>().onSelectionChanged,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: SingleChildScrollView(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: channelList.isNotEmpty
-                ? SegmentedButton(
-                    emptySelectionAllowed: true,
-                    segments: channelList
-                        .map((e) =>
-                            ButtonSegment(value: e.id, label: Text(e.label)))
-                        .toList(),
-                    selected: {context.watch<LibraryModal>().selectedId},
-                    onSelectionChanged:
-                        context.read<LibraryModal>().onChannelChanged,
-                  )
-                : Container(),
+            child: SegmentedButton(
+              emptySelectionAllowed: true,
+              segments: level1Options
+                  .map((e) => ButtonSegment(value: e.id, label: Text(e.label)))
+                  .toList(),
+              selected: {context.watch<LibraryModal>().selectedPid},
+              onSelectionChanged:
+                  context.read<LibraryModal>().onSelectionChanged,
+            ),
           ),
-        ),
-        Expanded(
-            child: SearchList(
-          fetchData: context.read<LibraryModal>().fetchNextPage,
-        )),
-      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: channelList.isNotEmpty
+                  ? SegmentedButton(
+                      emptySelectionAllowed: true,
+                      segments: channelList
+                          .map((e) =>
+                              ButtonSegment(value: e.id, label: Text(e.label)))
+                          .toList(),
+                      selected: {context.watch<LibraryModal>().selectedId},
+                      onSelectionChanged:
+                          context.read<LibraryModal>().onChannelChanged,
+                    )
+                  : Container(),
+            ),
+          ),
+          Expanded(
+              child: SearchList(
+            fetchData: context.read<LibraryModal>().fetchNextPage,
+          )),
+        ],
+      ),
     );
   }
 }

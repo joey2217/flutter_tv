@@ -13,7 +13,7 @@ class AppSearchBar extends StatelessWidget {
           LibraryModal libraryModal, Widget? child) {
         var isSelected = appModel.profile.brightness == null
             ? appModel.profile.brightness == Brightness.dark
-            : Theme.of(context).brightness == Brightness.dark;
+            : MediaQuery.platformBrightnessOf(context) == Brightness.dark;
         return SearchBar(
           onSubmitted: (value) {
             debugPrint('SearchBar value $value');

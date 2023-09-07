@@ -8,15 +8,20 @@ import 'package:flutter_tv/store/library.dart';
 import 'package:flutter_tv/store/video.dart';
 import 'package:provider/provider.dart';
 
+import 'common/dio_request.dart';
+
 void main() async {
+  DioRequest.init();
   await LocalStorage.init();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
+    debugPrint('theme: ${MediaQuery.platformBrightnessOf(context)}');
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppModel()),
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(
                 seedColor: Colors.deepPurple,
                 brightness: appModel.profile.brightness ??
-                    Theme.of(context).brightness),
+                    MediaQuery.platformBrightnessOf(context)),
             useMaterial3: true,
           ),
           initialRoute: '/',

@@ -12,5 +12,12 @@ class SearchParam {
   search(String searchKey) {
     keyword = searchKey;
     page = 1;
+    type = null;
+  }
+
+  setType(int t) {
+    type = t;
+    keyword = null;
+    page = 1;
   }
 }

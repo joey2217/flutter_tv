@@ -5,8 +5,23 @@ class Mine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('WIP'),
+    return const Column(
+      children: [
+        Row(
+          children: [
+            Icon(
+              Icons.perm_identity_outlined,
+              size: 24,
+            ),
+            Expanded(
+                child: Text(
+              "Hello",
+              style: TextStyle(fontSize: 20),
+            ))
+          ],
+        ),
+        Divider(),
+      ],
     );
   }
 }

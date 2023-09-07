@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_tv/models/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,15 +9,17 @@ class LocalStorage {
   static Profile profile = Profile(null);
 
   static Future<void> init() async {
-    // ignore: invalid_use_of_visible_for_testing_member
-    SharedPreferences.setMockInitialValues({});
+    WidgetsFlutterBinding.ensureInitialized();
     _prefs = await SharedPreferences.getInstance();
     String? profileStr = _prefs.getString('profile');
+    debugPrint('profileStr:$profileStr');
     if (profileStr != null) {
       profile = Profile.fromJson(jsonDecode(profileStr));
     }
   }
 
-  static saveProfile() =>
-      _prefs.setString("profile", jsonEncode(profile.toJson()));
+  static saveProfile() {
+    debugPrint('saveProfile:${profile.toJson()}');
+    _prefs.setString("profile", jsonEncode(profile.toJson()));
+  }
 }

@@ -8,19 +8,52 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        const SliverToBoxAdapter(
-          child: SizedBox(
-            height: 30,
-            child: Text(
-              "电影",
-              style: TextStyle(fontSize: 20),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CustomScrollView(
+        slivers: [
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+              child: Text(
+                "电影",
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ),
-        ),
-        VideoGrid(list: context.watch<HomeModel>().movies)
-      ],
+          VideoGrid(list: context.watch<HomeModel>().movies),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+              child: Text(
+                "电视剧",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          VideoGrid(list: context.watch<HomeModel>().tvs),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+              child: Text(
+                "动漫",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          VideoGrid(list: context.watch<HomeModel>().cartoon),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 30,
+              child: Text(
+                "综艺",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+          VideoGrid(list: context.watch<HomeModel>().varieties),
+        ],
+      ),
     );
   }
 }

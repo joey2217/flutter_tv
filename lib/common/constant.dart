@@ -3,6 +3,7 @@ import 'package:flutter_tv/models/channel.dart';
 const channelMapOptions = [
   {"type_id": 1, "type_pid": 0, "type_name": "电视剧"},
   {"type_id": 2, "type_pid": 0, "type_name": "电影"},
+  {"type_id": 20, "type_pid": 1, "type_name": "内地剧"},
   {"type_id": 3, "type_pid": 1, "type_name": "欧美剧"},
   {"type_id": 4, "type_pid": 1, "type_name": "香港剧"},
   {"type_id": 5, "type_pid": 1, "type_name": "韩剧"},
@@ -17,7 +18,6 @@ const channelMapOptions = [
   {"type_id": 15, "type_pid": 2, "type_name": "战争片"},
   {"type_id": 16, "type_pid": 2, "type_name": "记录片"},
   {"type_id": 17, "type_pid": 0, "type_name": "动漫"},
-  {"type_id": 20, "type_pid": 1, "type_name": "内地剧"},
   {"type_id": 23, "type_pid": 2, "type_name": "动画片"},
   {"type_id": 24, "type_pid": 17, "type_name": "中国动漫"},
   {"type_id": 25, "type_pid": 17, "type_name": "日本动漫"},

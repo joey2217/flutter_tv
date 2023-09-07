@@ -48,9 +48,9 @@ class _SearchListState extends State<SearchList> {
                 padding: const EdgeInsets.all(16.0),
                 alignment: Alignment.center,
                 child: const SizedBox(
-                  width: 24.0,
-                  height: 24.0,
-                  child: CircularProgressIndicator(strokeWidth: 2.0),
+                  width: 60.0,
+                  height: 60.0,
+                  child: CircularProgressIndicator(),
                 ),
               );
             } else {

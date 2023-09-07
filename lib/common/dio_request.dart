@@ -5,20 +5,10 @@ import 'package:flutter_tv/common/request_cache.dart';
 import 'package:flutter_tv/models/search_param.dart';
 import 'package:flutter_tv/models/video.dart';
 import 'package:flutter_tv/models/video_response.dart';
-import 'package:flutter_tv/store/home.dart';
 
 const baseURL = 'https://jyzyapi.com/provide/vod/at/json';
 
 final dio = Dio(BaseOptions(baseUrl: baseURL));
-
-const hotMovieIds = [
-  40626, //流浪地球
-  40650, // 满江红
-  43017, //灌篮高手
-  42928, //忠犬八公
-  42076, // 保你平安
-  31756, // 四海
-];
 
 class DioRequest {
   static init() {
@@ -27,13 +17,13 @@ class DioRequest {
     );
   }
 
-  Future<VideoResponse> fetchHotMovies() async {
-    var ids = hotMovieIds.join(',');
+  Future<VideoResponse> fetchHots(List<int> idList) async {
+    var ids = idList.join(',');
     var param = {'ac': 'detail', 'ids': ids};
     final res = await dio.get('', queryParameters: param);
     var videoResponse = VideoResponse.fromJson(jsonDecode(res.data));
-    videoResponse.list.sort(((a, b) =>
-        hotMovieIds.indexOf(a.vodId).compareTo(hotMovieIds.indexOf(b.vodId))));
+    videoResponse.list.sort(
+        ((a, b) => idList.indexOf(a.vodId).compareTo(idList.indexOf(b.vodId))));
     return videoResponse;
   }
 

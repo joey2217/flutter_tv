@@ -7,9 +7,7 @@ part 'profile.g.dart';
 class Profile {
   Brightness? brightness;
 
-  Profile(
-    this.brightness,
-  );
+  Profile(this.brightness);
 
   factory Profile.fromJson(Map<String, dynamic> srcJson) =>
       _$ProfileFromJson(srcJson);

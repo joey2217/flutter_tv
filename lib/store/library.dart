@@ -58,11 +58,17 @@ class LibraryModal extends ChangeNotifier {
           .toList();
       selectedId = channelList[0].id;
     }
+    param.setType(selectedId);
+    list.clear();
+    fetchSearchData();
     notifyListeners();
   }
 
   onChannelChanged(Set<int> newSelection) {
     selectedId = newSelection.first;
+    param.setType(selectedId);
+    list.clear();
+    fetchSearchData();
     notifyListeners();
   }
 }
