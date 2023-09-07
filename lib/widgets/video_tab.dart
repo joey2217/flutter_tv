@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv/widgets/keep_alive_wrapper.dart';
 import 'package:flutter_tv/widgets/video_info.dart';
 import 'package:flutter_tv/widgets/video_list.dart';
 
@@ -47,10 +46,8 @@ class _VideoTabState extends State<VideoTab> with TickerProviderStateMixin {
           child: TabBarView(
             controller: _tabController,
             children: const <Widget>[
-              SingleChildScrollView(child: VideoList()),
-              KeepAliveWrapper(
-                child: SingleChildScrollView(child: VideoInfo()),
-              ),
+              VideoList(),
+              SingleChildScrollView(child: VideoInfo()),
             ],
           ),
         )

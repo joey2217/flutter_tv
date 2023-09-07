@@ -4,9 +4,8 @@ import 'package:flutter_tv/common/dio_request.dart';
 import 'package:flutter_tv/models/channel.dart';
 import 'package:flutter_tv/models/search_param.dart';
 import 'package:flutter_tv/models/video.dart';
-import 'package:get/get.dart';
 
-class VideoLibController extends GetxController {
+class LibraryModal extends ChangeNotifier {
   int selectedPid = 1;
   int selectedId = 20;
   SearchParam param = SearchParam(null, null, 1);
@@ -17,17 +16,13 @@ class VideoLibController extends GetxController {
 
   List<Video> list = [];
 
-  static VideoLibController get to => Get.find();
-
-  @override
-  void onInit() {
-    super.onInit();
+  LibraryModal() {
     fetchSearchData();
   }
 
   Future fetchSearchData() async {
-    if (state == FetchState.finish) {
-      debugPrint('END');
+    if (state != FetchState.init) {
+      debugPrint('STATE: $state');
       return;
     }
     state = FetchState.loading;
@@ -38,7 +33,7 @@ class VideoLibController extends GetxController {
     } else {
       state = FetchState.init;
     }
-    update();
+    notifyListeners();
   }
 
   fetchNextPage() {
@@ -63,11 +58,11 @@ class VideoLibController extends GetxController {
           .toList();
       selectedId = channelList[0].id;
     }
-    update();
+    notifyListeners();
   }
 
   onChannelChanged(Set<int> newSelection) {
     selectedId = newSelection.first;
-    update();
+    notifyListeners();
   }
 }

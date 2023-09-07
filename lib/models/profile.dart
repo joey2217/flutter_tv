@@ -3,8 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
 
-enum AppTheme { system, light, dark }
-
 @JsonSerializable()
 class Profile {
   Brightness? brightness;

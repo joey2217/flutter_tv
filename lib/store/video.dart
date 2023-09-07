@@ -1,35 +1,28 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tv/common/dio_request.dart';
 import 'package:flutter_tv/common/utils.dart';
 import 'package:flutter_tv/models/video.dart';
-import 'package:get/get.dart';
 
-class VideoController extends GetxController {
-  var playIndex = 0;
-  var video = Video(0, '', 0, '', '', '', 0, '', 0, '', '', '', '', '', 0, '',
-      '', '', 0, '', '', 0, '', '', '');
-
+class VideoModal extends ChangeNotifier {
+  late Video video;
   List<LiveItem> playList = [];
-
   String playUrl = '';
+  var playIndex = 0;
 
-  Future<bool> fetchVideo(String id) async {
+  Future<bool> fetchVideo(int id) async {
     var data = await DioRequest().fetchMovie(id);
     video = data;
-    update();
-    return true;
-  }
-
-  setVideo(Video v) {
-    video = v;
     playList = parsePlayUrl(video.vodPlayFrom, video.vodPlayUrl);
     if (playList.isNotEmpty) {
       playUrl = playList[playIndex].url;
     }
-    update();
+    notifyListeners();
+    return true;
   }
 
   play(int index) {
     playIndex = index;
-    update();
+    playUrl = playList[index].url;
+    notifyListeners();
   }
 }

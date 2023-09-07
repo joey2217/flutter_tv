@@ -1,56 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv/common/dio_request.dart';
-import 'package:flutter_tv/states/video.dart';
+import 'package:flutter_tv/store/video.dart';
 import 'package:flutter_tv/widgets/video_app.dart';
 import 'package:flutter_tv/widgets/video_tab.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-class Video extends StatelessWidget {
-  const Video({super.key});
+class VideoPage extends StatelessWidget {
+  const VideoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final id = Get.parameters['id'];
-    debugPrint('id:$id');
+    final id = ModalRoute.of(context)!.settings.arguments as int;
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder(
-            future: DioRequest().fetchMovie(id!),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data != null) {
-                return GetBuilder<VideoController>(
-                    init: VideoController(),
-                    builder: (controller) {
-                      debugPrint('data:${snapshot.data}');
-                      controller.setVideo(snapshot.data!);
-                      var playUrl = controller.playUrl;
-                      var video = controller.video;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          playUrl == ''
-                              ? const Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 16.0 / 9.0,
-                                    child: Text('Loading'),
-                                  ),
-                                )
-                              : VideoApp(
-                                  liveUrl: playUrl,
-                                ),
-                          Text(video.vodName),
-                          const Expanded(
-                            child: VideoTab(),
-                          ),
-                        ],
-                      );
-                    });
-              } else if (snapshot.hasError) {
-                return Text("Error: ${snapshot.error}");
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            }),
+          future: context.read<VideoModal>().fetchVideo(id),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var video = context.read<VideoModal>().video;
+              var playUrl = context.watch<VideoModal>().playUrl;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      Positioned(
+                          top: 10,
+                          left: 10,
+                          child: IconButton(
+                            icon: const Icon(Icons.chevron_left),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          )),
+                      playUrl == ''
+                          ? const Center(
+                              child: AspectRatio(
+                                aspectRatio: 16.0 / 9.0,
+                                child: Text('Loading'),
+                              ),
+                            )
+                          : VideoApp(
+                              liveUrl: playUrl,
+                            )
+                    ],
+                  ),
+                  Text(video.vodName),
+                  const Expanded(
+                    child: VideoTab(),
+                  ),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Text("Error: ${snapshot.error}");
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }

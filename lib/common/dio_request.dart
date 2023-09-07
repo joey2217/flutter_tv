@@ -5,6 +5,7 @@ import 'package:flutter_tv/common/request_cache.dart';
 import 'package:flutter_tv/models/search_param.dart';
 import 'package:flutter_tv/models/video.dart';
 import 'package:flutter_tv/models/video_response.dart';
+import 'package:flutter_tv/store/home.dart';
 
 const baseURL = 'https://jyzyapi.com/provide/vod/at/json';
 
@@ -36,7 +37,7 @@ class DioRequest {
     return videoResponse;
   }
 
-  Future<Video> fetchMovie(String id) async {
+  Future<Video> fetchMovie(int id) async {
     var param = {'ac': 'detail', 'ids': id};
     final res = await dio.get('', queryParameters: param);
     var videoResponse = VideoResponse.fromJson(jsonDecode(res.data));

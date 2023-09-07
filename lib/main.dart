@@ -1,50 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tv/common/dio_request.dart';
 import 'package:flutter_tv/common/local_storage.dart';
-import 'package:flutter_tv/routes/video.dart';
 import 'package:flutter_tv/routes/index.dart';
-import 'package:flutter_tv/states/state.dart';
-import 'package:flutter_tv/states/video_lib.dart';
-import 'package:get/get.dart';
+import 'package:flutter_tv/routes/video.dart';
+import 'package:flutter_tv/store/app.dart';
+import 'package:flutter_tv/store/home.dart';
+import 'package:flutter_tv/store/library.dart';
+import 'package:flutter_tv/store/video.dart';
+import 'package:provider/provider.dart';
 
-Future<void> main() async {
-  await initServices();
-
-  /// 等待服务初始化.
-  runApp(const MyApp());
-}
-
-Future<void> initServices() async {
-  DioRequest.init();
+void main() async {
   await LocalStorage.init();
-
-  ///这里是你放get_storage、hive、shared_pref初始化的地方。
-  ///或者moor连接，或者其他什么异步的东西。
-  print('All services started...');
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => VideoLibController());
-    return GetBuilder(
-        init: StateController(),
-        builder: (c) {
-          return GetMaterialApp(
-            title: "FlutterTV",
-            theme: ThemeData(
-                primarySwatch: Colors.blue,
-                useMaterial3: true,
-                brightness: c.brightness ?? Theme.of(context).brightness),
-            initialRoute: '/',
-            getPages: [
-              GetPage(name: '/', page: () => const Index()),
-              GetPage(name: '/video/:id', page: () => const Video()),
-            ],
-            debugShowCheckedModeBanner: false,
-          );
-        });
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppModel()),
+        ChangeNotifierProvider(create: (_) => HomeModel()),
+        ChangeNotifierProvider(create: (_) => VideoModal()),
+        ChangeNotifierProvider(create: (_) => LibraryModal()),
+      ],
+      child: Consumer<AppModel>(builder: (context, AppModel appModel, child) {
+        return MaterialApp(
+          title: 'FlutterTV',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.deepPurple,
+                brightness: appModel.profile.brightness ??
+                    Theme.of(context).brightness),
+            useMaterial3: true,
+          ),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const Index(),
+            '/video': (context) => const VideoPage(),
+          },
+          debugShowCheckedModeBanner: false,
+        );
+      }),
+    );
   }
 }

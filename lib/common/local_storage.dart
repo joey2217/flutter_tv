@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_tv/models/profile.dart';
-import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalStorage extends GetxService {
+class LocalStorage {
   static late SharedPreferences _prefs;
 
   static Profile profile = Profile(null);

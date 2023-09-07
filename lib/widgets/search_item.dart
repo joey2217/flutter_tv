@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tv/models/video.dart';
-import 'package:get/get.dart';
 
 class SearchItem extends StatelessWidget {
   final Video video;
@@ -13,10 +12,11 @@ class SearchItem extends StatelessWidget {
       splashColor: Colors.blue.withAlpha(30),
       onTap: () {
         debugPrint('Card tapped. ${video.vodId}');
-        Get.toNamed("/video/${video.vodId}");
+        // Get.toNamed("/video/${video.vodId}");
+        Navigator.of(context).pushNamed("/video", arguments: video.vodId);
       },
       child: SizedBox(
-        height: 100,
+        height: 120,
         child: Row(
           children: [
             Image.network(
