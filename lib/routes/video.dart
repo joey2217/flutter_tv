@@ -7,8 +7,6 @@ import 'package:provider/provider.dart';
 class VideoPage extends StatelessWidget {
   const VideoPage({super.key});
 
-  dispose(){}
-
   @override
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)!.settings.arguments as int;
@@ -26,7 +24,10 @@ class VideoPage extends StatelessWidget {
                   Stack(
                     alignment: AlignmentDirectional.center,
                     children: [
-                         VideoApp(liveUrl: playUrl,),
+                      VideoApp(
+                        key: videoAppKey,
+                        liveUrl: playUrl,
+                      ),
                       Positioned(
                           top: 10,
                           left: 10,
@@ -35,16 +36,33 @@ class VideoPage extends StatelessWidget {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                          )
-                      ),
+                          )),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                    child: Text(video.vodName, style: const TextStyle(fontSize: 20),),
-                  ), Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-                    child: Text(context.read<VideoModal>().playUrl),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    child: Text(
+                      video.vodName,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    child: Text(
+                      "${video.vodRemarks} · ${video.vodTime}",
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+                    child: Text(
+                      "${video.typeName} · ${video.vodArea} · ${video.vodLang}}",
+                      maxLines: 1,
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                   const Expanded(
                     child: VideoTab(),

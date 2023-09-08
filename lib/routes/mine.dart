@@ -11,12 +11,12 @@ class Mine extends StatelessWidget {
           children: [
             Icon(
               Icons.perm_identity_outlined,
-              size: 24,
+              size: 32,
             ),
             Expanded(
                 child: Text(
               "Hello",
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 32),
             ))
           ],
         ),

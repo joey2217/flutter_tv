@@ -43,12 +43,15 @@ class _VideoTabState extends State<VideoTab> with TickerProviderStateMixin {
           ],
         ),
         Expanded(
-          child: TabBarView(
-            controller: _tabController,
-            children: const <Widget>[
-              VideoList(),
-              SingleChildScrollView(child: VideoInfo()),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TabBarView(
+              controller: _tabController,
+              children: const <Widget>[
+                VideoList(),
+                SingleChildScrollView(child: VideoInfo()),
+              ],
+            ),
           ),
         )
       ],

@@ -4,7 +4,8 @@ import 'package:video_player/video_player.dart';
 
 const url = 'https://hd.ijycnd.com/play/7axmKRnb/index.m3u8';
 
-/// Stateful widget to fetch and then display video content.
+GlobalKey<_VideoAppState> videoAppKey = GlobalKey<_VideoAppState>();
+
 class VideoApp extends StatefulWidget {
   final String liveUrl;
 
@@ -17,17 +18,27 @@ class VideoApp extends StatefulWidget {
 class _VideoAppState extends State<VideoApp> {
   late VideoPlayerController _controller;
   ChewieController? _chewieController;
+  var loading = true;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.liveUrl));
+    updateVideoUrl(widget.liveUrl);
+  }
+
+  updateVideoUrl(String url) {
+    setState(() {
+      loading = true;
+    });
+    _controller = VideoPlayerController.networkUrl(Uri.parse(url));
     _controller.initialize().then((_) {
       _chewieController = ChewieController(
           videoPlayerController: _controller,
           autoPlay: true,
           optionsTranslation: OptionsTranslation(cancelButtonText: "返回"));
-      setState(() {});
+      setState(() {
+        loading = false;
+      });
     });
   }
 
@@ -36,7 +47,8 @@ class _VideoAppState extends State<VideoApp> {
     return Center(
         child: AspectRatio(
       aspectRatio: 16.0 / 9.0,
-      child: _chewieController != null &&
+      child: !loading &&
+              _chewieController != null &&
               _chewieController!.videoPlayerController.value.isInitialized
           ? Chewie(
               controller: _chewieController!,

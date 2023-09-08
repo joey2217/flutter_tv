@@ -24,6 +24,11 @@ class VideoCard extends StatelessWidget {
             child: GridTileBar(
               backgroundColor: Colors.black45,
               title: Text(video.vodName),
+              subtitle: Text(
+                '${video.vodRemarks}(${video.vodTime})',
+                maxLines: 1,
+                style: const TextStyle(overflow: TextOverflow.ellipsis),
+              ),
             ),
           ),
           child: Material(
